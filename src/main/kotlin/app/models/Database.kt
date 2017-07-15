@@ -13,7 +13,8 @@ class Database {
     }
 
     init {
-        val client = KMongo.createClient(MongoClientURI("mongodb://admin:devSolidbr33Ze@ds135519.mlab.com:35519/soskit"))
+        val uri = "mongodb://" + System.getenv("DB_USER") + ":" + System.getenv("DB_PASSWORD") + "@" + System.getenv("DB_HOST") + "/" + System.getenv("DB_NAME")
+        val client = KMongo.createClient(MongoClientURI(uri))
         this.db = client.getDatabase("soskit")
     }
 }
