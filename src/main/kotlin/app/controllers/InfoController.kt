@@ -1,6 +1,7 @@
 package app.controllers
 
 import spark.Spark.*
+import com.github.salomonbrys.kotson.*
 
 class InfoController {
 
@@ -8,7 +9,11 @@ class InfoController {
         path("/info") {
 
             get("") { req, res ->
-                "Forms Server"
+                res.type("json")
+                jsonObject(
+                        "version" to System.getenv("VERSION"),
+                        "mode" to System.getenv("ENV")
+                )
             }
         }
     }
