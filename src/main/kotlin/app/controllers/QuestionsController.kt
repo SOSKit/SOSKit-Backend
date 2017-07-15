@@ -1,14 +1,18 @@
 package app.controllers
 
-import spark.*
+import app.services.QuestionsService
+import spark.Spark.*
 
 class QuestionsController {
 
-    init {
-        Spark.path("/question") {
+    private var service = QuestionsService()
 
-            Spark.get("") { req, res ->
-                "Forms Server"
+    init {
+        path("/question") {
+
+            get("") { req, res ->
+                res.type("json")
+                this.service.getQuestions()
             }
         }
     }
